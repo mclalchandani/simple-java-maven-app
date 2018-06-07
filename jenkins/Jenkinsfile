@@ -12,13 +12,7 @@ pipeline {
             }
         }
         
-        stage("Scan with Lifecycle") {
-             steps{
-                             
-	           nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: "mvn-sample",
-                iqScanPatterns: [[scanPattern: "**/*.jar"]], iqStage: 'build', jobCredentialsId: ''
-             }           
-        }
+        
 
         stage('Test') {
             steps {
@@ -30,6 +24,15 @@ pipeline {
                 }
             }
         }
+        
+        stage("Scan with Lifecycle") {
+             steps{
+                             
+	           nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: "mvn-sample",
+                iqScanPatterns: [[scanPattern: "**/*.jar"]], iqStage: 'build', jobCredentialsId: ''
+             }           
+        }
+        
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
