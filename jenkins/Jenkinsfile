@@ -16,7 +16,7 @@ pipeline {
              steps{
                              
 	           nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: "mvn-sample",
-                iqScanPatterns: [[scanPattern: "**/target/*.jar"]], iqStage: 'build', jobCredentialsId: ''
+                iqScanPatterns: [[scanPattern: "**/*.jar"]], iqStage: 'build', jobCredentialsId: ''
              }           
         }
 
